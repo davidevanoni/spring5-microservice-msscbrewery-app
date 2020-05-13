@@ -30,7 +30,7 @@ public class BeerController {
         HttpHeaders headers = new HttpHeaders();
         //This is by convention each time we call POST method to create an object: include Location header with the ID of the object created.
         //TODO add hostname to URL
-        headers.add("Location", "/api/v1/beer" + saveDto.getId().toString());
+        headers.add("Location", "/api/v1/beer/" + saveDto.getId().toString());
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
 
@@ -38,5 +38,11 @@ public class BeerController {
     public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto){
         beerService.updateBeer(beerId, beerDto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping({"/{beerId}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBeer(@PathVariable("beerId") UUID beerId){
+        beerService.deleteById(beerId);
     }
 }
