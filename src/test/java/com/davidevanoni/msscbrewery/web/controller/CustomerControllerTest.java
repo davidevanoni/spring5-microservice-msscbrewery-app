@@ -61,7 +61,7 @@ class CustomerControllerTest {
         //given
         CustomerDto customerDto = validCustomer;
         customerDto.setId(null);
-        CustomerDto savedDto = CustomerDto.builder().id(UUID.randomUUID()).customerName("New Customer").build();
+        CustomerDto savedDto = CustomerDto.builder().id(UUID.randomUUID()).customerName("New customer").build();
         String customerToJson = objectMapper.writeValueAsString(customerDto);
 
         given(customerService.saveNewCustomer(any())).willReturn(savedDto);
